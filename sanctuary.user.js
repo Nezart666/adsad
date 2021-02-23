@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Sanctuary Connector (here is the part i need to fix)
+// @name         Sanctuary Connector WORKING DUMBASS
 // @version      0.1
 // @match        *://*.moomoo.io/*
 // @match        *://moomoo.io/*
@@ -10,7 +10,7 @@
     let ws = window.WebSocket;
     class Sanctuary extends ws {
         constructor(){
-            super('ws://prairie-leaf-triangle.glitch.me');
+            super('wss://prairie-leaf-triangle.glitch.me/moomoo'); // better? u happy now? its set to moomoo dipshit
         }
     }
     window.WebSocket = Sanctuary;

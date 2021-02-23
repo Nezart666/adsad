@@ -78,7 +78,7 @@ app.get('/api/v1/players', (req, res) => {
       clients.push(
         {
           clientIPHash: arrayBufferToHex(SHA256(new TextEncoder().encode(client.ip))),
-          playerName: client.player?.name || "unknown",
+          playerName: client.player?.name || "Red Dragon",
           playerID: client.player?.id || -1
         }
       );
