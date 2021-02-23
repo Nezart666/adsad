@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Sanctuary Connector (here is the part i need to fix )
+// @name         Sanctuary Connector (here is the part i need to fix)
 // @version      0.1
 // @match        *://*.moomoo.io/*
 // @match        *://moomoo.io/*
