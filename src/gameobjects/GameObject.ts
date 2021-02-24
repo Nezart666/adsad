@@ -13,7 +13,7 @@ export default class GameObject {
     public realScale: number = scale,
     public data: any = null,
     public ownerSID: number = -1,
-    public health: number = -1,
+    public health: number = -2,
     public dmg: number = 0
   ) {}
 
