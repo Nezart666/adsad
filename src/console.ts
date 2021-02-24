@@ -20,13 +20,13 @@ let lastMessage = "";
 const dispatcher = new CommandDispatcher();
 
 dispatcher.register(
-  literal("restarty").executes(() => {
+  literal("server_restart").executes(() => {
     process.exit();
   })
 );
 
 dispatcher.register(
-  literal("broadcast").then(
+  literal("ping").then(
     argument("message", string()).executes((context) => {
       let packetFactory = PacketFactory.getInstance();
       let message = context.getArgument("message", String);
@@ -114,7 +114,7 @@ dispatcher.register(
 );
 
 dispatcher.register(
-  literal("invisible").executes((context) => {
+  literal("invis").executes((context) => {
     let thisPlayer = context.getSource() as Player;
     let game = getGame();
 
@@ -129,7 +129,7 @@ dispatcher.register(
 );
 
 dispatcher.register(
-  literal("invincible").executes((context) => {
+  literal("god").executes((context) => {
     let thisPlayer = context.getSource() as Player;
     let game = getGame();
 
