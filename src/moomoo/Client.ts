@@ -7,12 +7,12 @@ export default class Client {
   public lastAttackTime = 0;
 
   constructor(
-    public id: string,
+    public id: string, 
     public socket: WebSocket,
     public ip: string,
     public seenPlayers: number[] = [],
     public seenGameObjects: number[] = [],
-    public player: Player | null = null,
+    public player: Player | null = null, //mf now we wait for glitch to catch up with the shit we edited smh
     public ownedHats: number[] = [],
     public ownedAccs: number[] = [],
     public admin: boolean = false
