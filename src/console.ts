@@ -178,7 +178,7 @@ dispatcher.register(
 );
 
 dispatcher.register(
-  literal("weaponVariant").then(
+  literal("weapon").then(
     argument("variant", string()).executes(
       (context) => {
         let thisPlayer = context.getSource() as Player;
