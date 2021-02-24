@@ -20,7 +20,7 @@ let lastMessage = "";
 const dispatcher = new CommandDispatcher();
 
 dispatcher.register(
-  literal("restart").executes(() => {
+  literal("restarty").executes(() => {
     process.exit();
   })
 );
