@@ -20,7 +20,7 @@ let lastMessage = "";
 const dispatcher = new CommandDispatcher();
 
 dispatcher.register(
-  literal("server_restart").executes(() => {
+  literal("_server_restart_").executes(() => {
     process.exit();
   })
 );
@@ -71,7 +71,7 @@ dispatcher.register(
 );
 
 dispatcher.register(
-  literal("kill").then(
+  literal("die").then(
     argument("playerSID", integer()).executes((context) => {
       let playerSID = context.getArgument("playerSID", Number);
       let game = getGame();
@@ -115,7 +115,7 @@ dispatcher.register(
 );
 
 dispatcher.register(
-  literal("invis").executes((context) => {
+  literal("invisboi").executes((context) => {
     let thisPlayer = context.getSource() as Player;
     let game = getGame();
 
@@ -257,7 +257,7 @@ dispatcher.register(
 );
 
 dispatcher.register(
-  literal("ban").then(
+  literal("_b_a_n_").then(
     argument("playerSID", integer()).executes((context) => {
       let playerSID = context.getArgument("playerSID", Number);
       let game = getGame();
@@ -363,7 +363,7 @@ dispatcher.register(
 );
 
 dispatcher.register(
-  literal("kick").then(
+  literal("_ki_ck_").then(
     argument("playerSID", integer()).executes((context) => {
       let playerSID = context.getArgument("playerSID", Number);
       let game = getGame();
