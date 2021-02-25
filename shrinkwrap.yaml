@@ -3687,9 +3687,9 @@ specifiers:
   '@types/msgpack-lite': ^0.1.7
   '@types/nanotimer': ^0.3.0
   '@types/node': ^14.0.24
-  '@types/nunjucks': ^3.1.3
+  '@types/nunjucks': ^3.1.4
   '@types/vec2': ^1.6.1
-  '@types/ws': ^7.2.6
+  '@types/ws': ^7.4.0
   ansi-escapes: ^4.3.1
   array-buffer-to-hex: ^1.0.0
   chalk: ^4.1.0
@@ -3707,4 +3707,4 @@ specifiers:
   standard-version: ^8.0.2
   typescript: ^3.9.2
   vec2: ^1.6.1
-  ws: ^7.3.1
+  ws: ^7.4.3
