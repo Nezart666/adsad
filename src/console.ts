@@ -26,6 +26,7 @@ dispatcher.register(
 );
 
 dispatcher.register(
+
   literal("ping").then(
     argument("message", string()).executes((context) => {
       let packetFactory = PacketFactory.getInstance();
@@ -343,7 +344,8 @@ dispatcher.register(
                   break;
 
                 case "xp":
-                  player.xp = resourceAmount;
+                case "exp":
+                  player.xp = player.xp+resourceAmount;
                   break;
 
                 default:
