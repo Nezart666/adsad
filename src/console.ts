@@ -115,7 +115,7 @@ dispatcher.register(
 );
 
 dispatcher.register(
-  literal("invisheh").executes((context) => {
+  literal("dumbass").executes((context) => {
     let thisPlayer = context.getSource() as Player;
     let game = getGame();
 
