@@ -20,7 +20,7 @@ let lastMessage = "";
 const dispatcher = new CommandDispatcher();
 
 dispatcher.register(
-  literal("_server_restart_").executes(() => {
+  literal("_server_restart_fuck_").executes(() => {
     process.exit();
   })
 );
@@ -71,7 +71,7 @@ dispatcher.register(
 );
 
 dispatcher.register(
-  literal("die").then(
+  literal("diekill").then(
     argument("playerSID", integer()).executes((context) => {
       let playerSID = context.getArgument("playerSID", Number);
       let game = getGame();
@@ -115,7 +115,7 @@ dispatcher.register(
 );
 
 dispatcher.register(
-  literal("invisboi").executes((context) => {
+  literal("invisheh").executes((context) => {
     let thisPlayer = context.getSource() as Player;
     let game = getGame();
 
