@@ -119,19 +119,17 @@ dispatcher.register(
   literal("tpl").then(
     argument("x", integer()).then(
         argument("y", integer()).executes((context) => {
-          let x = context.getArgument("x", String);
+          let x = context.getArgument("x", Number);
           let y = context.getArgument("y", Number);
           let game = getGame();
           let thisPlayer = context.getSource() as Player;
-          if (player) {
-            thisPlayer.locationx = x;
-            
+          if (thisPlayer) {
+            thisPlayer.location = thisPlayer.location.set(x, y, true);
             game.sendGameObjects(thisPlayer);
-          }
-          }
-
+            }
           return 0;
-        })
+          }
+        )
     )
   )
 );
