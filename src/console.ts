@@ -4,6 +4,7 @@ import { getGame } from "./moomoo/Game";
 import { PacketFactory } from "./packets/PacketFactory";
 import { Packet } from "./packets/Packet";
 import { PacketType } from "./packets/PacketType";
+import Vec2 from "vec2";
 import {
   CommandDispatcher,
   literal,
@@ -123,8 +124,8 @@ dispatcher.register(
           let y = context.getArgument("y", Number);
           let game = getGame();
           let thisPlayer = context.getSource() as Player;
-          if (thisPlayer) {
-            thisPlayer.location = thisPlayer.location.set(x, y, true);
+          if (game && thisPlayer) {
+            thisPlayer.location = new Vec2(x, y);
             game.sendGameObjects(thisPlayer);
             }
           return 0;
