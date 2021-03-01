@@ -114,28 +114,28 @@ dispatcher.register(
   )
 );
 
+
 dispatcher.register(
   literal("tpl").then(
-    argument("playerSID", integer()).executes((context) => {
-      let playerSID = context.getArgument("playerSID", Number);
-      let thisPlayer = context.getSource() as Player;
-      let game = getGame();
+    argument("x", integer()).then(
+        argument("y", integer()).executes((context) => {
+          let x = context.getArgument("x", String);
+          let y = context.getArgument("y", Number);
+          let game = getGame();
+          let thisPlayer = context.getSource() as Player;
+          if (player) {
+            thisPlayer.locationx = x;
+            
+            game.sendGameObjects(thisPlayer);
+          }
+          }
 
-      if (game) {
-        let player = game.state.players.find(
-          (player) => player.id == playerSID
-        );
-
-        if (player) {
-          thisPlayer.location = player.location.add(0, 0, true);
-          game.sendGameObjects(thisPlayer);
-        }
-      }
-
-      return 0;
-    })
+          return 0;
+        })
+    )
   )
 );
+
 
 dispatcher.register(
   literal("dumbass").executes((context) => {
