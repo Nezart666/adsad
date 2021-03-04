@@ -124,6 +124,29 @@ export default class Game {
     }
   }
 
+  newObject(locationx: int, ){
+    let newGameObject = new GameObject(
+          this.getNextGameObjectID(),
+          location,
+          10,
+          size,
+          gameObjectType,
+          gameObjectType == GameObjectType.Tree || gameObjectType == GameObjectType.Bush ? size * 0.6 : size,
+          {},
+          -1,
+          -1,
+          gameObjectType == GameObjectType.Bush && location.y >= 12e3 ? 35 : 0,
+        );
+
+        for (let gameObject of this.state.gameObjects) {
+          if (Physics.collideGameObjects(gameObject, newGameObject)) {
+            i--;
+            continue outerLoop;
+          }
+        }
+        this.state.gameObjects.push(newGameObject);
+  }
+
   async addClient(id: string, socket: WebSocket, ip: string) {
     // Only start on first connection to save resources
     if (!this.started) this.start();
