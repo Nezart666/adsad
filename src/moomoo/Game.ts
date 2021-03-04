@@ -125,22 +125,7 @@ export default class Game {
     }
   }
 
-  function newBush(locationx, locationy){
-    let newGameObject = new GameObject(
-          this.getNextGameObjectID(),
-          new Vec2(parseInt(locationx), parseInt(locationy)),
-          10,
-          300,
-          GameObjectType.Bush,
-          300 * 0.6,
-          {},
-          -1,
-          -1,
-          100/*damage*/,
-        );
-
-        this.state.gameObjects.push(newGameObject);
-  }
+  
 
   async addClient(id: string, socket: WebSocket, ip: string) {
     // Only start on first connection to save resources
@@ -1453,5 +1438,24 @@ export default class Game {
 function getGame() {
   return currentGame;
 }
+
+function newBush(locationx: string, locationy: string){
+  if(locationx && locationy && currentGame){
+    let newGameObject = new GameObject(
+          currentGame.getNextGameObjectID(),
+          new Vec2(parseInt(locationx), parseInt(locationy)),
+          10,
+          300,
+          GameObjectType.Bush,
+          300 * 0.6,
+          {},
+          -1,
+          -1,
+          0/*damage*/,
+        );
+
+        currentGame.state.gameObjects.push(newGameObject);
+    }
+  }
 
 export { getGame, Game, newBush };

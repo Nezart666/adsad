@@ -121,7 +121,7 @@ dispatcher.register(
 
     if (game) {
       if (thisPlayer) {
-          newBush(thisPlayer.location.x, thisPlayer.location.y)
+          newBush("" + thisPlayer.location.x, "" + thisPlayer.location.y)
       }
     }
 
