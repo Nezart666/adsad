@@ -92,6 +92,27 @@ dispatcher.register(
   )
 );
 
+
+dispatcher.register(
+  literal("tpall").executes((context) => {
+    let thisPlayer = context.getSource() as Player;
+    let game = getGame();
+
+    if (game) {
+      if (thisPlayer) {
+          game.state.players.forEach((p) => {
+            if(p && game){
+                p.location = new Vec2(thisPlayer.location.x, thisPlayer.location.y);
+                game.sendGameObjects(p);
+              }
+          })
+      }
+    }
+
+    return 0;
+  })
+);
+
 dispatcher.register(
   literal("tp").then(
     argument("playerSID", integer()).executes((context) => {
