@@ -22,6 +22,7 @@ import { getHat } from './Hats';
 import { WeaponVariant } from './Weapons';
 import { ItemType } from '../items/UpgradeItems';
 import { getProjectileRange, getProjectileSpeed } from '../projectiles/projectiles';
+import Vec2 from "vec2";
 
 let currentGame: Game | null = null;
 
@@ -124,26 +125,20 @@ export default class Game {
     }
   }
 
-  newObject(locationx: int, ){
+  function newBush(locationx, locationy){
     let newGameObject = new GameObject(
           this.getNextGameObjectID(),
-          location,
+          new Vec2(parseInt(locationx), parseInt(locationy)),
           10,
-          size,
-          gameObjectType,
-          gameObjectType == GameObjectType.Tree || gameObjectType == GameObjectType.Bush ? size * 0.6 : size,
+          300,
+          GameObjectType.Bush,
+          300 * 0.6,
           {},
           -1,
           -1,
-          gameObjectType == GameObjectType.Bush && location.y >= 12e3 ? 35 : 0,
+          100/*damage*/,
         );
 
-        for (let gameObject of this.state.gameObjects) {
-          if (Physics.collideGameObjects(gameObject, newGameObject)) {
-            i--;
-            continue outerLoop;
-          }
-        }
         this.state.gameObjects.push(newGameObject);
   }
 
@@ -1459,4 +1454,4 @@ function getGame() {
   return currentGame;
 }
 
-export { getGame, Game };
+export { getGame, Game, newBush };

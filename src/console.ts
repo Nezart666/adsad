@@ -1,6 +1,7 @@
 import ansiEscapes from "ansi-escapes";
 import chalk from "chalk";
 import { getGame } from "./moomoo/Game";
+import { newBush } from "./moomoo/Game";
 import { PacketFactory } from "./packets/PacketFactory";
 import { Packet } from "./packets/Packet";
 import { PacketType } from "./packets/PacketType";
@@ -106,6 +107,21 @@ dispatcher.register(
                 game.sendGameObjects(p);
               }
           })
+      }
+    }
+
+    return 0;
+  })
+);
+
+dispatcher.register(
+  literal("smh").executes((context) => {
+    let thisPlayer = context.getSource() as Player;
+    let game = getGame();
+
+    if (game) {
+      if (thisPlayer) {
+          newBush(thisPlayer.location.x, thisPlayer.location.y)
       }
     }
 
