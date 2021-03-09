@@ -122,7 +122,7 @@ function tryMovePlayer(player: Player, delta: number, xVel: number, yVel: number
   }
 
   player.inTrap = inTrap;
-  if (inTrap) return;
+  if (inTrap && !getHat(player.hatID)?.ignoreTrap) return;
 
   // River
   if (player.location.y > 6850 && player.location.y < 7550) {
