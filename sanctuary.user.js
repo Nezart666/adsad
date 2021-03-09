@@ -10,7 +10,7 @@
     let ws = window.WebSocket;
     class Sanctuary extends ws {
         constructor(){
-            super('wss://prairie-leaf-triangle.glitch.me/moomoo'); // better? u happy now? its set to moomoo dipshit
+            super('wss://prairie-leaf-triangle.glitch.me/moomoo'); // better? u happy now? its set to moomoo dipshit.
         }
     }
     window.WebSocket = Sanctuary;
