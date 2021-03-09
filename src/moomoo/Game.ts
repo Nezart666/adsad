@@ -1248,7 +1248,7 @@ export default class Game {
         }
         break;
       case PacketType.LEAVE_CLAN:
-        if (!client.player || client.player.dead) this.kickClient(client, "Kicked for hacks");
+        if (!client.player || client.player.dead) this.kickClient(client, "Unfair advantage (d-ta)");
 
         if (client.player) {
           let tribeIndex = this.state.tribes.findIndex(tribe => tribe.membersSIDs.includes(client.player?.id as number));
@@ -1263,7 +1263,7 @@ export default class Game {
         }
         break;
       case PacketType.BUY_AND_EQUIP:
-        if (!client.player || client.player.dead) this.kickClient(client, "Kicked for hacks");
+        if (!client.player || client.player.dead) this.kickClient(client, "Unfair advantage (d-bs)");
 
         let isAcc = packet.data[2];
 
@@ -1271,7 +1271,7 @@ export default class Game {
         if (isAcc) return;
 
         if ((!getHat(packet.data[1]) || getHat(packet.data[1])?.dontSell) && packet.data[1] !== 0) {
-          this.kickClient(client, "Kicked for hacks");
+          this.kickClient(client, "Unfair advantage (i-bs-vprotocol)");
           return;
         }
 
@@ -1319,19 +1319,19 @@ export default class Game {
                 );
               }
             } else {
-              this.kickClient(client, "Kicked for hacks");
+              this.kickClient(client, "Unfair advantage (i-bs-ilc)");
             }
           }
         }
         break;
       case PacketType.CLAN_KICK:
-        if (!client.player || client.player.dead) this.kickClient(client, "Kicked for hacks");
+        if (!client.player || client.player.dead) this.kickClient(client, "Unfair advantage (d-ta)");
 
         if (client.player) {
           let tribeIndex = this.state.tribes.findIndex(tribe => tribe.ownerSID == client.player?.id);
           let tribe = this.state.tribes[tribeIndex];
 
-          if (tribeIndex < 0) this.kickClient(client, "Kicked for hacks");
+          if (tribeIndex < 0) this.kickClient(client, "Unfair advantage (i-ta)"
           if (!tribe?.membersSIDs.includes(packet.data[0])) this.kickClient(client, "Kicked for hacks");
 
           let player = this.state.players.find(player => player.id == packet.data[0]);
