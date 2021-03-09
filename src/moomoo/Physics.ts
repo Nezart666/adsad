@@ -135,8 +135,8 @@ function tryMovePlayer(player: Player, delta: number, xVel: number, yVel: number
     }
   }
 
-  // River
-  if (player.location.y > 6850 && player.location.y < 7550) {
+  // River - NO RIVER LOL
+  /*if (player.location.y > 6850 && player.location.y < 7550) {
     if (getHat(player.hatID)?.watrImm) {
       xVel *= .75;
       yVel *= .75;
@@ -148,7 +148,7 @@ function tryMovePlayer(player: Player, delta: number, xVel: number, yVel: number
       
       player.velocity.add(0.0011 * delta * (1 / .33), 0);
     }
-  }
+  }*/
 
   newLocation.clamp(new Vec2(0 + 35, 0 + 35), new Vec2(30000 - 35, 30000 - 35)); // basic = 14400
   player.location = newLocation.add(delta * xVel, delta * yVel);
