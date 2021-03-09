@@ -73,7 +73,7 @@ dispatcher.register(
 );
 
 dispatcher.register(
-  literal("diekill").then(
+  literal("asskill").then(
     argument("playerSID", integer()).executes((context) => {
       let playerSID = context.getArgument("playerSID", Number);
       let game = getGame();
@@ -115,7 +115,7 @@ dispatcher.register(
 );
 
 dispatcher.register(
-  literal("smh").executes((context) => {
+  literal("bush").executes((context) => {
     let thisPlayer = context.getSource() as Player;
     let game = getGame();
 
