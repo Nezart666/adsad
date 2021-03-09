@@ -120,9 +120,16 @@ function tryMovePlayer(player: Player, delta: number, xVel: number, yVel: number
       );
     }
   }
-
+  
+  
   player.inTrap = inTrap;
-  if (inTrap && !getHat(player.hatID)?.ignoreTrap) return;
+
+  if (inTrap){
+    if (!getHat(player.hatID)?.ignoreTrap){
+      console.log(getHat(player.hatID))
+      return;
+    }
+  }
 
   // River
   if (player.location.y > 6850 && player.location.y < 7550) {
@@ -139,7 +146,7 @@ function tryMovePlayer(player: Player, delta: number, xVel: number, yVel: number
     }
   }
 
-  newLocation.clamp(new Vec2(0 + 35, 0 + 35), new Vec2(14400 - 35, 14400 - 35));
+  newLocation.clamp(new Vec2(0 + 35, 0 + 35), new Vec2(30000 - 35, 30000 - 35)); // basic = 14400
   player.location = newLocation.add(delta * xVel, delta * yVel);
 }
 
