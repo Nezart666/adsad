@@ -83,6 +83,10 @@ function tryMovePlayer(player: Player, delta: number, xVel: number, yVel: number
       if (dmg && !(gameObj.isPlayerGameObject() && !gameObj.isEnemy(player, state.tribes)) && !player.spikeHit) {
         let owner = state.players.find(player => player.id == gameObj.ownerSID);
         player.spikeHit = 2;
+        
+        newLocation.clamp(new Vec2(0 + 35, 0 + 35), new Vec2(30000 - 35, 30000 - 35)); // basic = 14400
+        player.location = newLocation.add(delta * xVel, delta * yVel);
+        
 
         let hat = getHat(player.hatID);
 
@@ -107,6 +111,7 @@ function tryMovePlayer(player: Player, delta: number, xVel: number, yVel: number
             )
           )
         );
+        return;
       }
 
       xVel *= .83;
@@ -140,7 +145,7 @@ function tryMovePlayer(player: Player, delta: number, xVel: number, yVel: number
     } else {
       xVel *= .33;
       yVel *= .33;
-
+      
       player.velocity.add(0.0011 * delta * (1 / .33), 0);
     }
   }
