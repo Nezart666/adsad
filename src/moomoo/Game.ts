@@ -105,7 +105,7 @@ export default class Game {
         let size = sizes[Math.floor(Math.random() * sizes.length)];
 
         
-        let newGameObject = new GameObject(
+          let newGameObject = new GameObject(
             this.getNextGameObjectID(),
             location,
             10,
@@ -121,14 +121,15 @@ export default class Game {
           if(gameObjectType == GameObjectType.Tree){
             let chance = Math.round(Math.random() * 100)
             if(chance < BIG_TREE_CHANCE){
+              console.log("Generating big tree at: " + location.x + ", " + location.y);
               for(let lp = 0; lp < BIG_TREE_GIVE_WOOD; lp++){
                 newGameObject = new GameObject(
                   this.getNextGameObjectID(),
                   location,
                   10,
-                  size,
+                  600,
                   gameObjectType,
-                  800,
+                  600,
                   {},
                   -1,
                   -1,
@@ -136,6 +137,20 @@ export default class Game {
                 );
                 this.state.gameObjects.push(newGameObject);
               }
+            }else{
+              newGameObject = new GameObject(
+                this.getNextGameObjectID(),
+                location,
+                10,
+                size,
+                gameObjectType,
+                size * 0.6,
+                {},
+                -1,
+                -1,
+                0,
+              );
+              this.state.gameObjects.push(newGameObject);
             }
           }else{
             for (let gameObject of this.state.gameObjects) {
