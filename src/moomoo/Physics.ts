@@ -126,7 +126,6 @@ function tryMovePlayer(player: Player, delta: number, xVel: number, yVel: number
 
   if (inTrap){
     if (!getHat(player.hatID)?.ignoreTrap){
-      console.log(getHat(player.hatID))
       return;
     }
   }
