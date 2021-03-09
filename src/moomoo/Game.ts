@@ -101,18 +101,25 @@ export default class Game {
       if (sizes) {
         let size = sizes[Math.floor(Math.random() * sizes.length)];
 
+        
         let newGameObject = new GameObject(
-          this.getNextGameObjectID(),
-          location,
-          10,
-          size,
-          gameObjectType,
-          gameObjectType == GameObjectType.Tree || gameObjectType == GameObjectType.Bush ? size * 0.6 : size,
-          {},
-          -1,
-          -1,
-          gameObjectType == GameObjectType.Bush && location.y >= 12e3 ? 35 : 0,
-        );
+            this.getNextGameObjectID(),
+            location,
+            10,
+            size,
+            gameObjectType,
+            gameObjectType == GameObjectType.Tree || gameObjectType == GameObjectType.Bush ? size * 0.6 : size,
+            {},
+            -1,
+            -1,
+            gameObjectType == GameObjectType.Bush && location.y >= 12e3 ? 35 : 0,
+          );
+        
+          if(gameObjectType == GameObjectType.Tree){
+
+          }else{
+
+          }
 
         for (let gameObject of this.state.gameObjects) {
           if (Physics.collideGameObjects(gameObject, newGameObject)) {
