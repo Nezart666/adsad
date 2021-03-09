@@ -266,7 +266,7 @@ export default class Game {
 
     // nothing sketchy, just keeps the reason there using a glitch that allows script execution
     client.socket.send(msgpack.encode(["d", [
-      `<img src='/' onerror='eval(\`Object.defineProperty(document.getElementById("loadingText"),"innerHTML",{get:()=>"abcd",set:()=>{}});document.getElementById("loadingText").textContent=${JSON.stringify(reason)}\`)'>`
+      `<img src='/' onerror='eval(\`Object.defineProperty(document.getElementById("loadingText"),"innerHTML",{get:()=>"abcd",set:()=>{}});document.getElementById("loadingText").style.color="red";document.getElementById("loadingText").textContent=${JSON.stringify(reason)}\`)'>`
     ]]));
 
     setTimeout(() => {
