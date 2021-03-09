@@ -87,7 +87,7 @@ export default class Game {
     const riverGameObjectTypes = [GameObjectType.Mine];
 
     outerLoop: for (let i = 0; i < 650; i++) {
-      let location = randomPos(14400, 14400);
+      let location = randomPos(30000, 30000);
       let gameObjectType =
         location.y >= 12e3 ?
           desertGameObjectTypes[Math.floor(Math.random() * desertGameObjectTypes.length)] :
@@ -998,7 +998,7 @@ export default class Game {
               newPlayer = player;
             }
 
-            newPlayer.location = randomPos(14400, 14400);
+            newPlayer.location = randomPos(30000, 30000);
             newPlayer.name =
               packet.data[0].name > 15 || packet.data[0].name === ""
                 ? "unknown"

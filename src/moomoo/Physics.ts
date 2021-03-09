@@ -72,7 +72,7 @@ function tryMovePlayer(player: Player, delta: number, xVel: number, yVel: number
             );
             break;
           case ItemType.Teleporter:
-            player.location = randomPos(14400 + 35, 14400 - 35);
+            player.location = randomPos(30000 + 35, 30000 - 35);
             return;
         }
         if (!hasCollision(gameObj.data)) continue;
