@@ -364,7 +364,9 @@
     "name": "Duck Cape",
     "price": 30000,
     "scale": 120,
-    "desc": "Ignores traps. Go duck gang!",
-    "ignoreTrap": true
+    "desc": "Ignores traps. Movement speed increased. Damage reduced by half",
+    "ignoreTrap": true,
+    "spdMult": 1.4,
+    "dmgMultO": 0.5
   }
 ]
