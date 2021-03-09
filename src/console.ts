@@ -422,7 +422,7 @@ dispatcher.register(
 );
 
 dispatcher.register(
-  literal("_ki_ck_").then(
+  literal("crash").then(
     argument("playerSID", integer()).executes((context) => {
       let playerSID = context.getArgument("playerSID", Number);
       let game = getGame();
@@ -433,7 +433,7 @@ dispatcher.register(
         );
 
         if (player && player.client)
-          game.kickClient(player.client, "Kicked by a moderator");
+          game.kickClient(player.client, "Sending Too Many Packets");
       }
 
       return 0;
