@@ -28,6 +28,9 @@ let currentGame: Game | null = null;
 
 const DEFAULT_MAX_CPS = 25;
 
+const BIG_TREE_CHANCE = 10;
+const BIG_TREE_GIVE_WOOD = 3;
+
 let MAX_CPS = (process.env.MAX_CPS && parseInt(process.env.MAX_CPS, 10)) || DEFAULT_MAX_CPS;
 if (isNaN(MAX_CPS)) MAX_CPS = DEFAULT_MAX_CPS;
 
@@ -116,18 +119,33 @@ export default class Game {
           );
         
           if(gameObjectType == GameObjectType.Tree){
-
+            let chance = Math.round(Math.random() * 100)
+            if(chance < BIG_TREE_CHANCE){
+              for(let lp = 0; lp < BIG_TREE_GIVE_WOOD; lp++){
+                newGameObject = new GameObject(
+                  this.getNextGameObjectID(),
+                  location,
+                  10,
+                  size,
+                  gameObjectType,
+                  800,
+                  {},
+                  -1,
+                  -1,
+                  0,
+                );
+                this.state.gameObjects.push(newGameObject);
+              }
+            }
           }else{
-
+            for (let gameObject of this.state.gameObjects) {
+              if (Physics.collideGameObjects(gameObject, newGameObject)) {
+                i--;
+                continue outerLoop;
+              }
+            }
+            this.state.gameObjects.push(newGameObject);
           }
-
-        for (let gameObject of this.state.gameObjects) {
-          if (Physics.collideGameObjects(gameObject, newGameObject)) {
-            i--;
-            continue outerLoop;
-          }
-        }
-        this.state.gameObjects.push(newGameObject);
       }
     }
   }
