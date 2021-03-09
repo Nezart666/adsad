@@ -195,11 +195,11 @@ export default class Game {
         } else {
           this.kickClient(
             client,
-            "Kicked for hacks"
+            "Unfair advantage (mp-g-vprotocol)"
           );
         }
       } catch (e) {
-        this.kickClient(client, "Kicked for hacks");
+        this.kickClient(client, "Unfair advantage (mp-g-vprotocol)");
       }
     });
 
@@ -973,7 +973,7 @@ export default class Game {
 
     switch (packet.type) {
       case PacketType.SPAWN:
-        if (client.player && !client.player.dead) this.kickClient(client, "Kicked for hacks");
+        if (client.player && !client.player.dead) this.kickClient(client, "Unfair advantage (i-g-vprotocol)");
 
         if (
           "name" in packet.data[0] &&
@@ -1050,7 +1050,7 @@ export default class Game {
             }
           }
         } else {
-          this.kickClient(client, "Malformed spawn packet!");
+          this.kickClient(client, "Unfair advantage (mp-g-vprotocol)");
         }
         break;
       case PacketType.ATTACK:
@@ -1068,7 +1068,7 @@ export default class Game {
             client.player.isAttacking = false;
           }
         } else {
-          this.kickClient(client, "Kicked for hacks");
+          this.kickClient(client, "b-ap-vprotocol");
         }
         break;
       case PacketType.PLAYER_MOVE:
@@ -1082,7 +1082,7 @@ export default class Game {
         if (client.player) client.player.angle = packet.data[0];
         break;
       case PacketType.CHAT:
-        if (!client.player || client.player.dead) this.kickClient(client, "Kicked for hacks");
+        if (!client.player || client.player.dead) this.kickClient(client, "Unfair advantage (d-m-vprotocol)");
 
         for (let badWord of badWords) {
           if (packet.data[0].includes(badWord))
@@ -1106,7 +1106,7 @@ export default class Game {
         }
         break;
       case PacketType.CLAN_CREATE:
-        if (!client.player || client.player.dead) this.kickClient(client, "Kicked for hacks");
+        if (!client.player || client.player.dead) this.kickClient(client, "Unfair advantage (d-ta-vprotocol)");
 
         if (client.player) {
           let tribe = this.state.addTribe(packet.data[0], client.player.id);
@@ -1125,7 +1125,7 @@ export default class Game {
         }
         break;
       case PacketType.CLAN_REQ_JOIN:
-        if (!client.player || client.player.dead) this.kickClient(client, "Kicked for hacks");
+        if (!client.player || client.player.dead) this.kickClient(client, "d-ta-vprotocol");
 
         if (client.player && client.player.clanName === null) {
           let tribe = this.state.tribes.find(
@@ -1145,11 +1145,11 @@ export default class Game {
             )
           }
         } else {
-          this.kickClient(client, "Kicked for hacks")
+          this.kickClient(client, "Unfair advantage (i-ta-vprotocol)")
         }
         break;
       case PacketType.CLAN_ACC_JOIN:
-        if (!client.player || client.player.dead) this.kickClient(client, "Kicked for hacks");
+        if (!client.player || client.player.dead) this.kickClient(client, "Unfair advantage (d-ta-vprotocol)");
 
         if (client.tribeJoinQueue.length && client.player && packet.data[1]) {
           let tribe = this.state.tribes.find(
@@ -1216,7 +1216,7 @@ export default class Game {
                 client.player.lastHitTime = 0;
               client.player.selectedWeapon = client.player.secondaryWeapon;
             } else {
-              this.kickClient(client, "Kicked for hacks");
+              this.kickClient(client, "Unfair advantage (i-pw-vprotocol)");
             }
           } else {
             let itemCost = getItemCost(packet.data[0]);
@@ -1248,7 +1248,7 @@ export default class Game {
         }
         break;
       case PacketType.LEAVE_CLAN:
-        if (!client.player || client.player.dead) this.kickClient(client, "Unfair advantage (d-ta)");
+        if (!client.player || client.player.dead) this.kickClient(client, "Unfair advantage (d-ta-vprotocol)");
 
         if (client.player) {
           let tribeIndex = this.state.tribes.findIndex(tribe => tribe.membersSIDs.includes(client.player?.id as number));
@@ -1263,7 +1263,7 @@ export default class Game {
         }
         break;
       case PacketType.BUY_AND_EQUIP:
-        if (!client.player || client.player.dead) this.kickClient(client, "Unfair advantage (d-bs)");
+        if (!client.player || client.player.dead) this.kickClient(client, "Unfair advantage (d-bs-vprotocol)");
 
         let isAcc = packet.data[2];
 
@@ -1278,7 +1278,7 @@ export default class Game {
         if (client.player) {
           if (packet.data[0]) {
             if (client.ownedHats.includes(packet.data[1])) {
-              this.kickClient(client, "Kicked for hacks");
+              this.kickClient(client, "Unfair advantage (i-bs-vprotocol)");
             } else {
               if (client.player.points >= (getHat(packet.data[1])?.price || 0)) {
                 client.player.points -= getHat(packet.data[1])?.price || 0;
@@ -1331,18 +1331,18 @@ export default class Game {
           let tribeIndex = this.state.tribes.findIndex(tribe => tribe.ownerSID == client.player?.id);
           let tribe = this.state.tribes[tribeIndex];
 
-          if (tribeIndex < 0) this.kickClient(client, "Unfair advantage (i-ta)"
-          if (!tribe?.membersSIDs.includes(packet.data[0])) this.kickClient(client, "Kicked for hacks");
+          if (tribeIndex < 0) this.kickClient(client, "Unfair advantage (i-ta-vprotocol)");
+          if (!tribe?.membersSIDs.includes(packet.data[0])) this.kickClient(client, "Unfair advantage (i-ta-iex)");
 
           let player = this.state.players.find(player => player.id == packet.data[0]);
-          if (!player) this.kickClient(client, "Kicked for hacks");
+          if (!player) this.kickClient(client, "Unfair advantage (i-ta-iex)");
 
           if (player)
             this.state.leaveClan(player, tribeIndex);
         }
         break;
       case PacketType.SELECT_UPGRADE:
-        if (!client.player || client.player.dead) this.kickClient(client, "Kicked for hacks");
+        if (!client.player || client.player.dead) this.kickClient(client, "Unfair advantage (d-iu-vprotocol)");
 
         if (client.player) {
           let item = packet.data[0] as number;
@@ -1354,7 +1354,7 @@ export default class Game {
               let preItem = getPrerequisiteWeapon(item);
 
               if (preItem) {
-                if (!(client.player.weapon == preItem || client.player.secondaryWeapon == preItem)) this.kickClient(client, "Kicked for hacks");
+                if (!(client.player.weapon == preItem || client.player.secondaryWeapon == preItem)) this.kickClient(client, "Unfair advantage (i-pw-iex)");
               }
 
               if (Object.values(PrimaryWeapons).includes(item)) {
@@ -1371,7 +1371,7 @@ export default class Game {
                 client.player.secondaryWeaponExp = 0;
               }
             } else {
-              this.kickClient(client, "Kicked for hacks");
+              this.kickClient(client, "Unfair advantage (i-pw-iex)");
             }
           } else {
             item -= 16;
@@ -1379,13 +1379,13 @@ export default class Game {
               let preItem = getPrerequisiteItem(item);
 
               if (preItem) {
-                if (!client.player.items.includes(item - preItem)) this.kickClient(client, "Kicked for hacks");
+                if (!client.player.items.includes(item - preItem)) this.kickClient(client, "Unfair advantage (i-pw-iex)");
               }
 
               client.player.items[getGroupID(item)] = item;
               client.player.items = client.player.items.filter(playerItem => playerItem != undefined);
             } else {
-              this.kickClient(client, "Kicked for hacks");
+              this.kickClient(client, "Unfair advantage (i-iu-iex)");
             }
           }
 
@@ -1428,7 +1428,7 @@ export default class Game {
             );
           }
         } else {
-          this.kickClient(client, "Kicked for hacks");
+          this.kickClient(client, "b-g-iex");
         }
         break;
     }
