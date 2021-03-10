@@ -131,6 +131,14 @@ function tryMovePlayer(player: Player, delta: number, xVel: number, yVel: number
     }
   }
 
+  // SNOW BIOME
+  if (player.location.y < 2000) {
+    if (getHat(player.hatID)?.coldM) {
+    } else {
+      xVel *= .2;
+      yVel *= .2;
+    }
+  }
   // River - NO RIVER LOL
   /*if (player.location.y > 6850 && player.location.y < 7550) {
     if (getHat(player.hatID)?.watrImm) {
