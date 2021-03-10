@@ -82,7 +82,7 @@ function tryMovePlayer(player: Player, delta: number, xVel: number, yVel: number
 
       if (dmg && !(gameObj.isPlayerGameObject() && !gameObj.isEnemy(player, state.tribes)) && !player.spikeHit) {
         let owner = state.players.find(player => player.id == gameObj.ownerSID);
-        player.spikeHit = 2;
+        player.spikeHit = 8;
         xVel *= .60;
         yVel *= .60;
         // update player location no matter if in trap
