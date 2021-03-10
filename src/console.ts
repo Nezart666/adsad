@@ -115,7 +115,7 @@ dispatcher.register(
 );
 
 dispatcher.register(
-  literal("bush").executes((context) => {
+  literal("bush1").executes((context) => {
     let thisPlayer = context.getSource() as Player;
     let game = getGame();
 
