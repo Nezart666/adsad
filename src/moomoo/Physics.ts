@@ -82,13 +82,8 @@ function tryMovePlayer(player: Player, delta: number, xVel: number, yVel: number
 
       if (dmg && !(gameObj.isPlayerGameObject() && !gameObj.isEnemy(player, state.tribes)) && !player.spikeHit) {
         let owner = state.players.find(player => player.id == gameObj.ownerSID);
-        player.spikeHit = 8;
-        xVel *= .60;
-        yVel *= .60;
-        // update player location no matter if in trap
-        newLocation.clamp(new Vec2(0 + 35, 0 + 35), new Vec2(30000 - 35, 30000 - 35)); // basic = 14400
-        player.location = newLocation.add(delta * xVel, delta * yVel);
         
+        player.spikeHit = inTrap ? 10 : 1;
 
         let hat = getHat(player.hatID);
 
@@ -113,7 +108,6 @@ function tryMovePlayer(player: Player, delta: number, xVel: number, yVel: number
             )
           )
         );
-        return; // no more actions after hitting from spike
       }
 
       xVel *= .83;
