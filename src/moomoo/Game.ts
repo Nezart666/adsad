@@ -1018,7 +1018,7 @@ export default class Game {
       client.packetCount--;
     }, 500)
     
-    if(client.packetCount > 30) this.kickClient(client, "AzAc > you are too fast");
+    if(client.packetCount > 50) this.kickClient(client, "LWAC > sending too many packets");
     
     switch (packet.type) {
       case PacketType.SPAWN:

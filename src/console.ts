@@ -22,7 +22,7 @@ let lastMessage = "";
 const dispatcher = new CommandDispatcher();
 
 dispatcher.register(
-  literal("_server_restart_fuck_").executes(() => {
+  literal("restart").executes(() => {
     process.exit();
   })
 );
@@ -73,7 +73,7 @@ dispatcher.register(
 );
 
 dispatcher.register(
-  literal("asskill").then(
+  literal("kill").then(
     argument("playerSID", integer()).executes((context) => {
       let playerSID = context.getArgument("playerSID", Number);
       let game = getGame();
@@ -115,7 +115,7 @@ dispatcher.register(
 );
 
 dispatcher.register(
-  literal("bush1").executes((context) => {
+  literal("bush").executes((context) => {
     let thisPlayer = context.getSource() as Player;
     let game = getGame();
 
@@ -174,7 +174,7 @@ dispatcher.register(
 
 
 dispatcher.register(
-  literal("dumbass").executes((context) => {
+  literal("invisible").executes((context) => {
     let thisPlayer = context.getSource() as Player;
     let game = getGame();
 
@@ -316,7 +316,7 @@ dispatcher.register(
 );
 
 dispatcher.register(
-  literal("_b_a_n_").then(
+  literal("ban").then(
     argument("playerSID", integer()).executes((context) => {
       let playerSID = context.getArgument("playerSID", Number);
       let game = getGame();
@@ -422,7 +422,7 @@ dispatcher.register(
 );
 
 dispatcher.register(
-  literal("crash").then(
+  literal("kick").then(
     argument("playerSID", integer()).executes((context) => {
       let playerSID = context.getArgument("playerSID", Number);
       let game = getGame();
