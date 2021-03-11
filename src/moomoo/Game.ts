@@ -89,7 +89,7 @@ export default class Game {
     const desertGameObjectTypes = [GameObjectType.Bush, GameObjectType.Mine, GameObjectType.GoldMine];
     const riverGameObjectTypes = [GameObjectType.Mine];
 
-    outerLoop: for (let i = 0; i < 650; i++) {
+    outerLoop: for (let i = 0; i < 800; i++) {
       let location = randomPos(30000, 30000);
       let gameObjectType =
         location.y >= 12e3 ?
