@@ -1012,7 +1012,14 @@ export default class Game {
    */
   onMsg(client: Client, packet: Packet) {
     let packetFactory = PacketFactory.getInstance();
-
+    
+    client.packetCount++
+    setTimeout(() => {
+      client.packetCount--;
+    }, 500)
+    
+    if(client.packetCount > 30) this.kickClient(client, "AzAc > you are too fast");
+    
     switch (packet.type) {
       case PacketType.SPAWN:
         if (client.player && !client.player.dead) this.kickClient(client, "Unfair advantage (i-g-vprotocol)");

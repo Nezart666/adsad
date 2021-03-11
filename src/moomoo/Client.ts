@@ -5,6 +5,7 @@ export default class Client {
   public tribeJoinQueue: Player[] = [];
   public seenProjectiles: number[] = [];
   public lastAttackTime = 0;
+  public packetCount = 0;
 
   constructor(
     public id: string, 
