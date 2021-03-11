@@ -1137,6 +1137,8 @@ export default class Game {
           let chatPacket = packetFactory.serializePacket(
             new Packet(PacketType.CHAT, [client.player?.id, packet.data[0]])
           );
+          
+          
 
           client.socket?.send(chatPacket);
 
