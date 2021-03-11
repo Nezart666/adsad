@@ -521,6 +521,8 @@ export default class Game {
 
     let attackerHat = getHat(from.hatID);
     let recieverHat = getHat(to.hatID);
+    
+    
 
     let healAmount = (attackerHat?.healD || 0) * dmg;
     from.health += healAmount;
