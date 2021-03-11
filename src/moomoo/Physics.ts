@@ -67,8 +67,8 @@ function tryMovePlayer(player: Player, delta: number, xVel: number, yVel: number
             break;
           case ItemType.BoostPad:
             player.velocity.add(
-              Math.cos(gameObj.angle) * 0.3,
-              Math.sin(gameObj.angle) * 0.3
+              Math.cos(gameObj.angle) * 0.85,
+              Math.sin(gameObj.angle) * 0.85
             );
             break;
           case ItemType.Teleporter:
