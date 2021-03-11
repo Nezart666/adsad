@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "Light Wings",
+    "price": 15e3,
+    "scale": 138,
+    "xOff": 22,
+    "desc": "increases your movement speed",
+    "spdMult": 1.4
+  },
+  {
+    "id": 2,
+    "name": "Dark Wings",
+    "price": 15e3,
+    "scale": 138,
+    "xOff": 22,
+    "desc": "play dark tricks on your enemies"
+  },
+  {
+    "id": 3,
+    "name": "Bloody Wings",
+    "price": 2e4,
+    "scale": 178,
+    "xOff": 26,
+    "desc": "steal health from your enemies when you hit them",
+    "healD": 0.4
+  },
+  {
+    "id": 4,
+    "name": "Mecha Wings",
+    "price": 2e4,
+    "scale": 178,
+    "xOff": 26,
+    "desc": "reduces damage taken by 30%",
+    "dmg": 0.25
+  }
+]
