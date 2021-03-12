@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Sanctuary Connector WORKING DUMBASS
+// @name         Sanctuary Connector WORKING DUMBASS.
 // @version      0.1
 // @match        *://*.moomoo.io/*
 // @match        *://moomoo.io/*
