@@ -16,7 +16,7 @@ enum GameObjectType {
 }
 
 let gameObjectSizes: Partial<Record<GameObjectType, number[]>> = { };
-gameObjectSizes[GameObjectType.Tree] = [50, 60, 65, 75];
+gameObjectSizes[GameObjectType.Tree] = [250, 60, 65, 75];
 gameObjectSizes[GameObjectType.Bush] = gameObjectSizes[GameObjectType.Mine] = [50, 60];
 gameObjectSizes[GameObjectType.GoldMine] = [60];
 
