@@ -371,10 +371,10 @@
   },
   {
     "id": 60,
-    "name": "War Gear v6",
+    "name": "War Gear v6.9",
     "price": 12000,
     "scale": 120,
-    "desc": "reduces damage taken but slows movement",
+    "desc": "reduces damage Increase Speed",
     "spdMult": 1.4,
     "dmgMult": 0.75
   }
