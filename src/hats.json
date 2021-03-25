@@ -362,11 +362,20 @@
   {
     "id": 59,
     "name": "Duck Cape",
-    "price": 30000,
+    "price": 20000,
     "scale": 120,
     "desc": "Ignores traps. Movement speed increased. Damage reduced by half",
     "ignoreTrap": true,
     "spdMult": 1.4,
     "dmgMultO": 0.5
+  },
+  {
+    "id": 60,
+    "name": "War Gear v6",
+    "price": 12000,
+    "scale": 120,
+    "desc": "reduces damage taken but slows movement",
+    "spdMult": 1.4,
+    "dmgMult": 0.75
   }
 ]
