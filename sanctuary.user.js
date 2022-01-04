@@ -16,22 +16,6 @@
     window.WebSocket = Sanctuary;
 
     // prevent server full messages
-    Object.defineProperty(window, 'vultr', {
-        value: {
-            "scheme": "mm_prod",
-            "servers": [{
-                "ip": "_",
-                "scheme": "mm_prod",
-                "region": "vultr:12",
-                "index": 0,
-                "games": [{
-                    "playerCount": 0,
-                    "isPrivate": false
-                }]
-            }]
-        },
-        writable: false
-    });
 
     let open = XMLHttpRequest.prototype.open;
 
