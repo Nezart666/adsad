@@ -171,8 +171,6 @@ export default class Game {
     // Only start on first connection to save resources
     if (!this.started) this.start();
 
-    if (this.clients.filter(client => client.ip === ip).length >= 4) socket.terminate();
-
     let packetFactory = PacketFactory.getInstance();
 
     if (this.clients.some((client) => client.id === id))
@@ -182,7 +180,6 @@ export default class Game {
     let bannedIPs = this.db?.get("bannedIPs");
     if (bannedIPs) {
       if (bannedIPs.includes(ip).value()) {
-        this.kickClient(client, "You are banned");
         return;
       }
     }
@@ -232,16 +229,7 @@ export default class Game {
               Side.Server
             )
           );
-        } else {
-          this.kickClient(
-            client,
-            "Unfair advantage (mp-g-vprotocol)"
-          );
-        }
-      } catch (e) {
-        this.kickClient(client, "Unfair advantage (mp-g-vprotocol)");
-      }
-    });
+        } 
 
     socket.send(
       packetFactory.serializePacket(new Packet(PacketType.IO_INIT, [id]))
