@@ -19,6 +19,7 @@ import { getWeaponDamage, getWeaponAttackDetails, getItemCost, getPlaceable, Pri
 import { gameObjectSizes, GameObjectType } from "../gameobjects/gameobjects";
 import { getUpgrades, getWeaponUpgrades } from './Upgrades';
 import { getHat } from './Hats';
+import { getWings } from './Wings';
 import { WeaponVariant } from './Weapons';
 import { ItemType } from '../items/UpgradeItems';
 import { getProjectileRange, getProjectileSpeed } from '../projectiles/projectiles';
