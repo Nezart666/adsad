@@ -1039,10 +1039,10 @@ kickClient(client: Client, reason: string = "kicked") {
             newPlayer.dead = false;
             newPlayer.health = 100;
 
-            newPlayer.food = packet.data[0].moofoll ? 100 : 0;
-            newPlayer.points = packet.data[0].moofoll ? 100 : 0;
-            newPlayer.stone = packet.data[0].moofoll ? 100 : 0;
-            newPlayer.wood = packet.data[0].moofoll ? 100 : 0;
+            newPlayer.food = packet.data[0].moofoll ? Infinity : 0;
+            newPlayer.points = packet.data[0].moofoll ? Infinity : 0;
+            newPlayer.stone = packet.data[0].moofoll ? Infinity : 0;
+            newPlayer.wood = packet.data[0].moofoll ? Infinity : 0;
 
             client.socket.send(
               packetFactory.serializePacket(
@@ -1296,22 +1296,15 @@ kickClient(client: Client, reason: string = "kicked") {
           }
         }
         break;
-      case PacketType.BUY_AND_EQUIP:
-        if (!client.player || client.player.dead) this.kickClient(client, "Unfair advantage (d-bs-vprotocol)");
+        case PacketType.BUY_AND_EQUIP:
 
         let isAcc = packet.data[2];
 
-        if (isAcc) return;
 
-        if ((!getHat(packet.data[1]) || getHat(packet.data[1])?.dontSell) && packet.data[1] !== 0) {
-          this.kickClient(client, "Unfair advantage (i-bs-vprotocol)");
-          return;
-        }
 
         if (client.player) {
           if (packet.data[0]) {
             if (client.ownedHats.includes(packet.data[1])) {
-              this.kickClient(client, "Unfair advantage (i-bs-vprotocol)");
             } else {
               if (client.player.points >= (getHat(packet.data[1])?.price || 0)) {
                 client.player.points -= getHat(packet.data[1])?.price || 0;
@@ -1351,8 +1344,6 @@ kickClient(client: Client, reason: string = "kicked") {
                   )
                 );
               }
-            } else {
-              this.kickClient(client, "Unfair advantage (i-bs-ilc)");
             }
           }
         }
