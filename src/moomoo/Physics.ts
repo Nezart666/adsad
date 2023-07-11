@@ -21,11 +21,11 @@ function collideRectangles(x1: number, y1: number, w1: number, x2: number, y2: n
 }
 
 function moveTowards(player: Player, angle: number, speed: number, deltaTime: number, state: GameState) {
-  /* tryMovePlayer(player,
+  tryMovePlayer(player,
     deltaTime,
     Math.cos(angle) * speed * 0.1528, Math.sin(angle) * speed * 0.1528,
     state
-  ); */
+  ); 
   player.velocity.add(Math.cos(angle) * speed * .0016 * deltaTime, Math.sin(angle) * speed * .0016 * deltaTime);
 }
 

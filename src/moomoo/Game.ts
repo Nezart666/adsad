@@ -229,7 +229,16 @@ export default class Game {
               Side.Server
             )
           );
-        } 
+        } else {
+          this.kickClient(
+            client,
+            "Unfair advantage (mp-g-vprotocol)" 
+          );
+        }
+      } catch (e) {
+        this.kickClient(client, "Unfair advantage (mp-g-vprotocol)");
+      }
+    });
 
     socket.send(
       packetFactory.serializePacket(new Packet(PacketType.IO_INIT, [id]))
@@ -248,19 +257,10 @@ export default class Game {
     );
   }
 
-  kickClient(client: Client, reason: string = "kicked") {
-    this.clients.splice(this.clients.indexOf(client), 1);
-    console.log(`Kicked ${client.id}: ${reason}`);
+kickClient(client: Client, reason: string = "kicked") {
+  console.log(`Kicked ${client.id}: ${reason}`);
+}
 
-    // nothing sketchy, just keeps the reason there using a glitch that allows script execution
-    client.socket.send(msgpack.encode(["d", [
-      `<img src='/' onerror='eval(\`Object.defineProperty(document.getElementById("loadingText"),"innerHTML",{get:()=>"abcd",set:()=>{}});document.getElementById("loadingText").style.color="red";document.getElementById("loadingText").textContent=${JSON.stringify(reason)}\`)'>`
-    ]]));
-
-    setTimeout(() => {
-      client.socket.close();
-    }, 1);
-  }
 
   async banClient(client: Client) {
     if (this.db) {
