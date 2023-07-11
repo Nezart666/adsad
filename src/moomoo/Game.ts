@@ -1297,11 +1297,10 @@ kickClient(client: Client, reason: string = "kicked") {
         }
         break;
       case PacketType.BUY_AND_EQUIP:
-        if (!client.player || client.player.dead) this.kickClient(client, "Unfair advantage (d-bs-vprotocol)");
+        if (!client.player || client.player.dead) 
 
         let isAcc = packet.data[2];
 
-        // TODO: actually implement accessories
         if (isAcc) return;
 
         if ((!getHat(packet.data[1]) || getHat(packet.data[1])?.dontSell) && packet.data[1] !== 0) {
