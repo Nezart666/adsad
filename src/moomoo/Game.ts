@@ -1300,9 +1300,7 @@ kickClient(client: Client, reason: string = "kicked") {
         case PacketType.BUY_AND_EQUIP:
 
         let isAcc = packet.data[2];
-
-
-
+ 
         if (client.player) {
           if (packet.data[0]) {
             if (client.ownedHats.includes(packet.data[1])) {
