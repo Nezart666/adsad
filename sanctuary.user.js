@@ -15,7 +15,6 @@
     }
     window.WebSocket = Sanctuary;
 
-    // prevent server full messages
 
     let open = XMLHttpRequest.prototype.open;
 
@@ -24,14 +23,14 @@
 
         if (url) {
             if (url.endsWith("/serverData")) {
-                return open.apply(this, ['GET', 'data:application/json;base64,eyJzY2hlbWUiOiJtbV9wcm9kIiwic2VydmVycyI6W3siaXAiOiJfIiwic2NoZW1lIjoibW1fcHJvZCIsInJlZ2lvbiI6InZ1bHRyOjEyIiwiaW5kZXgiOjAsImdhbWVzIjpbeyJwbGF5ZXJDb3VudCI6MCwiaXNQcml2YXRlIjpmYWxzZX1dfV19Cg==']);
+                return open.apply(this, ['GET', 'data:application/json;base64,eyJzY2hlbWUiOiJtbV9wcm9kIiwic2VydmVycyI6W3siaXAiOiJfIiwic2NoZW1lIjoibW1fcHJvZCIsInJlZ2lvbiI6InZ1bHRyOjkiLCJpbmRleCI6MCwiZ2FtZXMiOlt7InBsYXllckNvdW50IjowLCJpc1ByaXZhdGUiOmZhbHNlfV19XX0K']);
             }
         }
 
         return open.apply(this, arguments);
     };
 
-    if (window.location.href.includes("?server=") && !window.location.href.includes("?server=12:0:0")) {
+    if (window.location.href.includes("?server=") && !window.location.href.includes("?server=9:0:0")) {
         window.location = "//" + window.location.host;
     }
 })();

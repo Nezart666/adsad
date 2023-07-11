@@ -6,16 +6,14 @@ import nunjucks from 'nunjucks';
 import SHA256 from 'fast-sha256';
 import arrayBufferToHex from 'array-buffer-to-hex';
 
-import * as console from './console';
-import { Server as WSServer } from 'ws';
+import { Server as WebSocketServer } from 'ws';
 import UptimeWSServer from './uptimeWS';
 import { startServer } from './moomoo/moomoo';
 import { getGame } from './moomoo/Game';
-import { TextEncoder } from 'util';
 
 const app = express();
 const server = http.createServer(app);
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 dotenv.config();
 
@@ -26,84 +24,73 @@ nunjucks.configure('views', {
 
 const VERSION = "0.0.0a";
 
-function format(timestamp: number) {
-  var hours = Math.floor(timestamp / (60 * 60));
-  var minutes = Math.floor(timestamp % (60 * 60) / 60);
-  var seconds = Math.floor(timestamp % 60);
+function format(timestamp) {
+  const hours = Math.floor(timestamp / (60 * 60));
+  const minutes = Math.floor((timestamp % (60 * 60)) / 60);
+  const seconds = Math.floor(timestamp % 60);
 
-  return hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+  return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
 
 app.get('/sanctuary', (req, res) => {
   if (req.accepts('html')) {
     res.render('version.html', { version: VERSION, nodeVersion: process.version, uptime: format(process.uptime()) });
-    return;
+  } else {
+    res.send(`Sanctuary v${VERSION}`);
   }
-
-  res.send('Sanctuary v${VERSION}');
 });
 
 app.get('/uptime', (req, res) => {
   if (req.accepts('html')) {
     res.redirect('/sanctuary');
-    return;
+  } else {
+    res.send(format(process.uptime()));
   }
-
-  res.send(format(process.uptime()));
 });
 
 app.get('/', (req, res) => {
-  res.redirect(`${req.protocol}://moomoo.io`)
+  res.redirect('https://moomoo.io');
 });
 
 app.get('/api/v1/playerCount', (_req, res) => {
-  let game = getGame();
-
+  const game = getGame();
   if (!game) {
-    res.send(JSON.stringify({ type: "error", message: "No game active." }));
+    res.json({ type: "error", message: "No game active." });
   } else {
-    res.send(JSON.stringify({ type: "success", playerCount: game.clients.length }));
+    res.json({ type: "success", playerCount: game.clients.length });
   }
 });
 
 app.get('/api/v1/players', (req, res) => {
-  let game = getGame();
-
+  const game = getGame();
   if (!game) {
-    res.send(JSON.stringify({ type: "error", message: "No game active." }));
+    res.json({ type: "error", message: "No game active." });
   } else {
-    let clients: { clientIPHash: string, playerName: string, playerID: number }[] = [];
+    const clients = game.clients.map(client => ({
+      clientIPHash: arrayBufferToHex(SHA256(new TextEncoder().encode(client.ip))),
+      playerName: client.player?.name || "Red Dragon",
+      playerID: client.player?.id || -1
+    }));
 
-    for (let client of game.clients) {
-      clients.push(
-        {
-          clientIPHash: arrayBufferToHex(SHA256(new TextEncoder().encode(client.ip))),
-          playerName: client.player?.name || "Red Dragon",
-          playerID: client.player?.id || -1
-        }
-      );
-    }
-
-    res.send(JSON.stringify({ type: "success", clients: clients }));
+    res.json({ type: "success", clients });
   }
 });
 
-let wss = new WSServer({ noServer: true });
+const wss = new WebSocketServer({ noServer: true });
 startServer(wss);
 
-let uptimeServer = new WSServer({ noServer: true });
-
+const uptimeServer = new WebSocketServer({ noServer: true });
 new UptimeWSServer(uptimeServer);
 
-server.on('upgrade', function upgrade(request, socket, head) {
+server.on('upgrade', (request, socket, head) => {
   const pathname = url.parse(request.url).pathname?.replace(/\/$/, '');
 
   if (pathname === '/uptimeWS') {
-    uptimeServer.handleUpgrade(request, socket, head, function done(ws) {
+    uptimeServer.handleUpgrade(request, socket, head, ws => {
       uptimeServer.emit('connection', ws, request);
     });
   } else if (pathname === '/moomoo') {
-    wss.handleUpgrade(request, socket, head, function done(ws) {
+    wss.handleUpgrade(request, socket, head, ws => {
       wss.emit('connection', ws, request);
     });
   } else {
@@ -111,6 +98,4 @@ server.on('upgrade', function upgrade(request, socket, head) {
   }
 });
 
-console.startConsole();
-
-server.listen(port || 3000, () => console.log(`Sanctuary listening at https://localhost:${port || 3000}`));
+server.listen(port, () => console.log(`Sanctuary listening at https://localhost:${port}`));
