@@ -1013,12 +1013,7 @@ export default class Game {
   onMsg(client: Client, packet: Packet) {
     let packetFactory = PacketFactory.getInstance();
     
-    client.packetCount++
-    setTimeout(() => {
-      client.packetCount--;
-    }, 500)
     
-    if(client.packetCount > 50) this.kickClient(client, "LWAC > sending too many packets");
     
     switch (packet.type) {
       case PacketType.SPAWN:
